@@ -5,7 +5,10 @@
 
 package test.mathematique;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 
@@ -14,18 +17,66 @@ import org.junit.jupiter.api.Test;
 
 import mathematique.Decomposition;
 
-/** TODO comment class responsibility (SRP)
- * @author FranÃ§ois
- *
+/**
+ * Class de test unitaire de la class {@link mathematique.Decomposition}
+ * @author François
  */
+@SuppressWarnings("static-method")
 class DecompositionTest {
-    
+
+    /** Jeux de test */
     private ArrayList<Decomposition> jeuxTest = new ArrayList<>();
-    
+
+    /** Génère le jeux de test */
     @BeforeEach
     void genererJeuxTest () {
         jeuxTest.add(new Decomposition(8,13,22));
         jeuxTest.add(new Decomposition(1,1,1));
+    }
+
+    /**
+     * Méthode de test pour {@link mathematique.Decomposition#decomposeNbDeuxiemeValeur}
+     */
+    @Test
+    void testDecomposeNbDeuxiemeValeur () {
+        Decomposition decomposition = new Decomposition(10, 5, 37);
+        assertEquals(3, decomposition.decomposeNbDeuxiemeValeur());
+        decomposition = new Decomposition(11, 12, 10);
+        assertEquals(0, decomposition.decomposeNbDeuxiemeValeur());
+    }
+
+    /**
+     * Méthode de test pour {@link mathematique.Decomposition#decomposeNbPremierValeur}
+     */
+    @Test
+    void testDecomposeNbPremierValeur () {
+        Decomposition decomposition = new Decomposition(10, 5, 37);
+        assertEquals(2, decomposition.decomposeNbPremierValeur());
+        decomposition = new Decomposition(11, 12, 10);
+        assertEquals(0, decomposition.decomposeNbPremierValeur());
+    }
+
+    /**
+     * Méthode de test pour {@link mathematique.Decomposition#decomposeReste}
+     */
+    @Test
+    void testDecomposeReste () {
+        Decomposition decomposition = new Decomposition(10, 5, 37);
+        assertEquals(2, decomposition.decomposeReste());
+        decomposition = new Decomposition(11, 12, 10);
+        assertEquals(10, decomposition.decomposeReste());
+    }
+
+    /**
+     * Méthode de test pour {@link mathematique.Decomposition#decomposer(int, int, int)}
+     */
+    @Test
+    void testDecomposerintintint() {
+        assertArrayEquals(new int[] {2,3,2},
+                          Decomposition.decomposer(10, 5, 37));
+        assertArrayEquals(new int[] {2,2,0},
+                Decomposition.decomposer(8, 13, 42));
+        assertArrayEquals(new int[] {0,0,10}, Decomposition.decomposer(11, 12, 10));
     }
 
     /**
@@ -35,28 +86,12 @@ class DecompositionTest {
     void testDecompositionIntIntInt() {
         assertDoesNotThrow(() -> new Decomposition(8,13,22));
         assertDoesNotThrow(() -> new Decomposition(1,1,1));
-        
+
         assertThrows(IllegalArgumentException.class, ()->new Decomposition(0,13,22));
         assertThrows(IllegalArgumentException.class, ()->new Decomposition(8,0,22));
         assertThrows(IllegalArgumentException.class, ()->new Decomposition(8,13,0));
     }
 
-    /**
-     * Méthode de test pour {@link mathematique.Decomposition#Decomposition()}.
-     */
-    @Test
-    void testDecomposition() {
-        assertDoesNotThrow(() -> new Decomposition());
-    }
-
-    /**
-     * Méthode de test pour {@link mathematique.Decomposition#getPremiereValeur()}.
-     */
-    @Test
-    void testGetPremiereValeur() {
-        assertEquals(8, jeuxTest.get(0).getPremiereValeur());
-        assertEquals(1, jeuxTest.get(1).getPremiereValeur());
-    }
 
     /**
      * Méthode de test pour {@link mathematique.Decomposition#getDeuxiemeValeur()}.
@@ -66,7 +101,7 @@ class DecompositionTest {
         assertEquals(13, jeuxTest.get(0).getDeuxiemeValeur());
         assertEquals(1, jeuxTest.get(1).getDeuxiemeValeur());
     }
-    
+
     /**
      * Méthode de test pour {@link mathematique.Decomposition#getMontant()}.
      */
@@ -77,18 +112,13 @@ class DecompositionTest {
     }
 
     /**
-     * Méthode de test pour {@link mathematique.Decomposition#setPremiereValeur(int)}.
+     * Méthode de test pour {@link mathematique.Decomposition#getPremiereValeur()}.
      */
     @Test
-    void testSetPremiereValeur() {
-        assertDoesNotThrow(() ->jeuxTest.get(0).setPremiereValeur(6));
-        assertEquals(6,jeuxTest.get(0).getPremiereValeur());
-        assertThrows(IllegalArgumentException.class,
-                     () -> jeuxTest.get(0).setPremiereValeur(0));
-        assertThrows(IllegalArgumentException.class,
-                     () -> jeuxTest.get(0).setPremiereValeur(-1));
+    void testGetPremiereValeur() {
+        assertEquals(8, jeuxTest.get(0).getPremiereValeur());
+        assertEquals(1, jeuxTest.get(1).getPremiereValeur());
     }
-
 
     /**
      * Méthode de test pour {@link mathematique.Decomposition#setDeuxiemeValeur(int)}.
@@ -103,7 +133,6 @@ class DecompositionTest {
                      () -> jeuxTest.get(0).setDeuxiemeValeur(-1));
     }
 
-
     /**
      * Méthode de test pour {@link mathematique.Decomposition#setMontant(int)}.
      */
@@ -115,6 +144,19 @@ class DecompositionTest {
                      () -> jeuxTest.get(0).setMontant(0));
         assertThrows(IllegalArgumentException.class,
                      () -> jeuxTest.get(0).setMontant(-1));
+    }
+
+    /**
+     * Méthode de test pour {@link mathematique.Decomposition#setPremiereValeur(int)}.
+     */
+    @Test
+    void testSetPremiereValeur() {
+        assertDoesNotThrow(() ->jeuxTest.get(0).setPremiereValeur(6));
+        assertEquals(6,jeuxTest.get(0).getPremiereValeur());
+        assertThrows(IllegalArgumentException.class,
+                     () -> jeuxTest.get(0).setPremiereValeur(0));
+        assertThrows(IllegalArgumentException.class,
+                     () -> jeuxTest.get(0).setPremiereValeur(-1));
     }
 
 }
