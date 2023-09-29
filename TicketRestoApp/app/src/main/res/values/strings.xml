@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Ticket-Resto-App</string>
+    <string name="tab_text_Accueil">Accueil</string>
+    <string name="tab_text_Parametre">Paramètre</string>
+    <string name="title">Ticket Resto Optimisateur</string>
+    <string name="txt_invite_saisie_montant">Saisissez le montant à payer</string>
+    <string name="placeholder_montant">Montant à payer</string>
+    <string name="button_text">Calculer</string>
+    <string name="txt_reste">Reste à payer</string>
 </resources>
