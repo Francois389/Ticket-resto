@@ -1,4 +1,4 @@
-package com.fsp.ticket_resto_app;
+package com.fsp.ticket_resto_app.ui;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

@@ -1,4 +1,4 @@
-package com.fsp.ticket_resto_app;
+package com.fsp.ticket_resto_app.ui;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Accueil extends Fragment {
+import com.fsp.ticket_resto_app.R;
+
+public class Parametre extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_accueil, container, false);
+        return inflater.inflate(R.layout.fragment_parametre, container, false);
     }
 }
