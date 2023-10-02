@@ -7,6 +7,9 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.widget.TableLayout;
 
+import com.fsp.ticket_resto_app.ui.Accueil;
+import com.fsp.ticket_resto_app.ui.Parametre;
+import com.fsp.ticket_resto_app.ui.VPAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {

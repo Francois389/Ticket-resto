@@ -12,7 +12,7 @@
     android:paddingTop="30dp"
     android:paddingRight="15dp"
     android:showDividers="middle"
-    tools:context=".ui.Accueil">
+    tools:context=".Accueil">
 
     <!-- Titre -->
     <LinearLayout
@@ -64,7 +64,7 @@
             android:minHeight="48dp" />
 
         <Button
-            android:id="@+id/btnCalculer"
+            android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -73,7 +73,7 @@
 
     </LinearLayout>
 
-    <View android:id="@+id/divider1" android:layout_width="match_parent" android:layout_height="1dp" android:background="?android:attr/listDivider" />
+    <View android:id="@+id/divider" android:layout_width="match_parent" android:layout_height="1dp" android:background="?android:attr/listDivider" />
 
     <!-- Premier ticket resultat -->
     <LinearLayout
@@ -97,7 +97,7 @@
             android:text="TextView" />
     </LinearLayout>
 
-    <View android:id="@+id/divider2" android:layout_width="match_parent" android:layout_height="1dp" android:background="?android:attr/listDivider" />
+    <View android:id="@+id/divider" android:layout_width="match_parent" android:layout_height="1dp" android:background="?android:attr/listDivider" />
 
     <!-- Second ticket resultat -->
     <LinearLayout
@@ -121,7 +121,7 @@
             android:text="TextView" />
     </LinearLayout>
 
-    <View android:id="@+id/divider3" android:layout_width="match_parent" android:layout_height="1dp" android:background="?android:attr/listDivider" />
+    <View android:id="@+id/divider" android:layout_width="match_parent" android:layout_height="1dp" android:background="?android:attr/listDivider" />
 
     <!-- Reste à payer -->
     <LinearLayout
