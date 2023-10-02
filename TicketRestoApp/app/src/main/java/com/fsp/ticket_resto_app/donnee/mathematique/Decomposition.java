@@ -3,7 +3,7 @@
  * IUT de Rodez, info1 2022-2023, aucun copyright ni copyleft
  */
 
-package com.fsp.ticket_resto_app.modele.mathematique;
+package com.fsp.ticket_resto_app.donnee.mathematique;
 
 /** TODO comment class responsibility (SRP)
  * Étant donnée deux entier positif et un montant réel positif,

@@ -1,12 +1,11 @@
-package com.fsp.ticket_resto_app.ui;
+package com.fsp.ticket_resto_app.ui.parametre;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
 
 import com.fsp.ticket_resto_app.R;
 
