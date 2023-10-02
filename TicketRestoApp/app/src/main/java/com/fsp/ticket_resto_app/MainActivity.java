@@ -1,11 +1,10 @@
 package com.fsp.ticket_resto_app;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import android.os.Bundle;
-import android.widget.TableLayout;
 
 import com.fsp.ticket_resto_app.ui.Accueil;
 import com.fsp.ticket_resto_app.ui.Parametre;
