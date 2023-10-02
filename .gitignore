@@ -31,9 +31,6 @@ replay_pid*
 
 .gitignore
 
-# Android Studio file
-.idea
-
 # Gradle files
 .gradle/
 build/
