@@ -1,23 +1,21 @@
 package com.fsp.ticket_resto_app.ui;
 
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.fragment.app.Fragment;
-
-import com.fsp.ticket_resto_app.databinding.FragmentParametreBinding;
+import com.fsp.ticket_resto_app.R;
 
 public class Parametre extends Fragment {
 
-    FragmentParametreBinding binding;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-    Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentParametreBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+        return inflater.inflate(R.layout.fragment_parametre, container, false);
     }
 }
