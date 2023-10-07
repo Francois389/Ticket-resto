@@ -9,6 +9,10 @@ import androidx.fragment.app.Fragment;
 
 import com.fsp.ticket_resto_app.R;
 
+/**
+ * Le controlleur de l'onget Paramétre.
+ * @author François de Saint Palais
+ */
 public class Parametre extends Fragment {
 
     @Override

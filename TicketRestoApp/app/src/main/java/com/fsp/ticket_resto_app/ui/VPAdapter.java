@@ -8,6 +8,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 
+/**
+ * Gére les onglets de l'application
+ */
 public class VPAdapter extends FragmentPagerAdapter {
 
     private final ArrayList<Fragment> fragments = new ArrayList<>();
