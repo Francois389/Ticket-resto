@@ -12,6 +12,9 @@ package com.fsp.ticket_resto_app.donnee.mathematique;
  */
 public class Decomposition {
 
+    private static final int VALEUR_TICKET_1 = 8;
+    private static final int VALEUR_TICKET_2 = 13;
+
     /** Le premier entier pour la  decomposition */
     private int premiereValeur;
     /** Le deuxième entier pour la  decomposition */
@@ -20,9 +23,9 @@ public class Decomposition {
     private int montant;
     
     /** TODO comment initial state properties
-     * @param premiereValeur
-     * @param deuxiemeValeur
-     * @param montant
+     * @param premiereValeur La valeur du premier entier
+     * @param deuxiemeValeur La valeur du deuxième entier
+     * @param montant Le montant à décomposer
      */
     public Decomposition(int premiereValeur, int deuxiemeValeur, int montant) {
         super();
@@ -39,6 +42,8 @@ public class Decomposition {
      */
     public Decomposition() {
         super();
+        premiereValeur = VALEUR_TICKET_1;
+        deuxiemeValeur = VALEUR_TICKET_2;
     }
     
     /**
@@ -53,10 +58,8 @@ public class Decomposition {
     public int[] decomposer() {
         int[] resultat = new int[3];
         int reste = montant;
-        int valeurPetite
-        = premiereValeur < deuxiemeValeur ? premiereValeur : deuxiemeValeur;
-        int valeurGrande
-        = premiereValeur > deuxiemeValeur ? premiereValeur : deuxiemeValeur;
+        int valeurPetite = Math.min(premiereValeur, deuxiemeValeur);
+        int valeurGrande = Math.max(premiereValeur, deuxiemeValeur);
 
         while (valeurPetite <= reste && reste != 0) {
             if (valeurGrande <= reste) {
