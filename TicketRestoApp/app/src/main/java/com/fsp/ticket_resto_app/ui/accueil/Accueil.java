@@ -1,7 +1,7 @@
 package com.fsp.ticket_resto_app.ui.accueil;
 
-import android.os.Bundle;
 import android.icu.util.Currency;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,8 +47,7 @@ public class Accueil extends Fragment {
         binding.btnCalculer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String textSasie = binding.montantAPayer.getText().toString();
-                binding.valeurReste.setText(textSasie);
+                calculer();
             }
         });
 
@@ -61,17 +60,14 @@ public class Accueil extends Fragment {
 
     private void calculer() {
 
-        String textSasie = binding.montantAPayer.getText().toString();
-        if (textSasie.isEmpty()) {
+        String textSaisie;
+        textSaisie = binding.montantAPayer.getText().toString();
+        if (textSaisie.isEmpty()) {
             popupErreur("Veillez saisir un montant");
         } else {
             try {
-                int montant = Integer.parseInt(textSasie);
+                int montant = Integer.parseInt(textSaisie);
                 controlleur.setMontantAPayer(montant);
-                System.out.println(controlleur.getQuantiteTicket1());
-                System.out.println(controlleur.getQuantiteTicket2());
-                System.out.println(controlleur.getReste());
-
                 binding.quantitePremierTicket.setText(controlleur.getQuantiteTicket1()+"");
                 binding.quantiteSecondTicket.setText(controlleur.getQuantiteTicket2()+"");
                 binding.valeurReste.setText(controlleur.getReste()+ Currency.getInstance(Locale.getDefault()).getSymbol());
