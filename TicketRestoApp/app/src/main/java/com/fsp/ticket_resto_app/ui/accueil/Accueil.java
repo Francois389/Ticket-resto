@@ -1,5 +1,7 @@
 package com.fsp.ticket_resto_app.ui.accueil;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.icu.util.Currency;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.fsp.ticket_resto_app.MainActivity;
 import com.fsp.ticket_resto_app.R;
 import com.fsp.ticket_resto_app.controlleur.Controlleur;
 import com.fsp.ticket_resto_app.databinding.FragmentAccueilBinding;
@@ -59,7 +62,6 @@ public class Accueil extends Fragment {
     }
 
     private void calculer() {
-
         String textSaisie;
         textSaisie = binding.montantAPayer.getText().toString();
         if (textSaisie.isEmpty()) {
@@ -80,7 +82,18 @@ public class Accueil extends Fragment {
     }
 
     private void popupErreur(String message) {
-        //TODO afficher une popup d'erreur
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        builder.setMessage(message);
+        builder.setTitle("Attention");
+        builder.setCancelable(true);
+
+        builder.setNegativeButton("Ok", (DialogInterface.OnClickListener) (dialog, which) -> {
+            dialog.cancel();
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
 }
