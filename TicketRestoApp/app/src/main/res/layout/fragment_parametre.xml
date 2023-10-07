@@ -14,18 +14,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="wrap_content"
+            android:layout_width="188dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/txt_montant_ticket_1" />
 
         <EditText
             android:id="@+id/montantPremierTicket"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:ems="10"
@@ -35,7 +37,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
 
         <TextView
             android:id="@+id/textView4"
@@ -46,7 +50,7 @@
 
         <EditText
             android:id="@+id/montantDeuxiemeTicket"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:ems="10"
