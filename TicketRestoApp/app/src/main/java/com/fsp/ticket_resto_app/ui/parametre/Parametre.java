@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.icu.util.Currency;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,9 +30,6 @@ public class Parametre extends Fragment {
     private Controlleur controlleur;
 
     private static String symboleMonnaie = Currency.getInstance(Locale.getDefault()).getSymbol();
-
-    private static TextView labelPremierTicket;
-    private static TextView labelSecondTicket;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,6 +64,7 @@ public class Parametre extends Fragment {
 
         try {
             if (!saisieValeurTicket1.isEmpty()) {
+                Log.d("Francois", "label ticket 1 : " + bindingAccueil.labelPremierTicket.getText().toString());
                 int montantPremierTicket = Integer.parseInt(binding.montantPremierTicket.getText().toString());
                 controlleur.setValeurTicket1(montantPremierTicket);
                 bindingAccueil.labelPremierTicket.setText(getString(R.string.txt_montant_ticket_1) + " " + controlleur.getValeurTicket1() + symboleMonnaie);

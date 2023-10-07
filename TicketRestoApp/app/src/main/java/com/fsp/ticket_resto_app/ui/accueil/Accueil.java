@@ -7,14 +7,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
-import com.fsp.ticket_resto_app.MainActivity;
 import com.fsp.ticket_resto_app.R;
 import com.fsp.ticket_resto_app.controlleur.Controlleur;
 import com.fsp.ticket_resto_app.databinding.FragmentAccueilBinding;
+import com.fsp.ticket_resto_app.viewModel.MyViewModel;
 
 import java.util.Locale;
 
@@ -26,6 +29,7 @@ public class Accueil extends Fragment {
 
     private FragmentAccueilBinding binding;
     private Controlleur controlleur;
+    private MyViewModel viewModel;
 
     private static String symboleMonnaie = Currency.getInstance(Locale.getDefault()).getSymbol();
 
@@ -42,10 +46,11 @@ public class Accueil extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.labelPremierTicket.setText(getString(R.string.txt_montant_ticket_1) + " " + controlleur.getValeurTicket1() + symboleMonnaie);
-        binding.labelSecondTicket.setText(getString(R.string.txt_montant_ticket_2) + " " + controlleur.getValeurTicket2() + symboleMonnaie);
-        binding.quantitePremierTicket.setText(0 + "");
-        binding.quantiteSecondTicket.setText(0 + "");
+        
+        binding.labelPremierTicket.setText(getString(R.string.txt_label_quantite_ticket) + " " + controlleur.getValeurTicket1() + symboleMonnaie);
+        binding.labelSecondTicket.setText(getString(R.string.txt_label_quantite_ticket) + " " + controlleur.getValeurTicket2() + symboleMonnaie);
+        binding.quantitePremierTicket.setText("0");
+        binding.quantiteSecondTicket.setText("0");
         binding.valeurReste.setText(0 + symboleMonnaie);
         binding.btnCalculer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,12 +58,24 @@ public class Accueil extends Fragment {
                 calculer();
             }
         });
-
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Créez une instance du ViewModel
+        viewModel = new ViewModelProvider(this).get(MyViewModel.class);
+
+        // Observer le LiveData
+        viewModel.getTextLiveData().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(String newText) {
+                // Mettez à jour votre UI avec la nouvelle valeur de LiveData
+                TextView textView = requireView().findViewById(R.id.montantPremierTicket);
+                textView.setText(newText);
+            }
+        });
     }
 
     private void calculer() {
@@ -79,6 +96,11 @@ public class Accueil extends Fragment {
                 popupErreur("Vous devez saisir une valeur positive");
             }
         }
+    }
+
+    // À un moment donné, vous pouvez mettre à jour la valeur du LiveData dans votre fragment
+    public void updateTextFromFragment(String newText) {
+        viewModel.updateText(newText);
     }
 
     private void popupErreur(String message) {
