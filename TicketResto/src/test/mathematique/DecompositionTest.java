@@ -40,6 +40,44 @@ class DecompositionTest {
         assertThrows(IllegalArgumentException.class, ()->new Decomposition(8,0,22));
         assertThrows(IllegalArgumentException.class, ()->new Decomposition(8,13,0));
     }
+    
+    @Test
+    void testDeLaMethode() {
+        int[] i;
+        
+        Decomposition d = new Decomposition(8, 23456, 17);
+        i = d.decomposer();
+        for (int j : i) {
+            System.out.print(j + ", ");
+        }
+        assertEquals(2, d.decomposeNbPremierValeur());
+        assertEquals(0, d.decomposeNbDeuxiemeValeur());
+        assertEquals(1, d.decomposeReste());
+
+        d = new Decomposition(23456, 8, 17);
+        assertEquals(0, d.decomposeNbPremierValeur());
+        assertEquals(2, d.decomposeNbDeuxiemeValeur());
+        assertEquals(1, d.decomposeReste());
+
+        d = new Decomposition(8, 13, 42);
+        assertEquals(2, d.decomposeNbPremierValeur());
+        assertEquals(2, d.decomposeNbDeuxiemeValeur());
+        assertEquals(0, d.decomposeReste());
+
+        d = new Decomposition(10, 5, 37);
+        i = d.decomposer();
+        System.out.println("Quantite 1 : " + i[0]);
+        System.out.println("Quantite 2 : " + i[1]);
+        System.out.println("Reste : " + i[2]);        
+        assertEquals(3, d.decomposeNbPremierValeur());
+        assertEquals(2, d.decomposeNbDeuxiemeValeur());
+        assertEquals(2, d.decomposeReste());
+
+        d = new Decomposition(5, 10, 37);
+        assertEquals(3, d.decomposeNbPremierValeur());
+        assertEquals(2, d.decomposeNbDeuxiemeValeur());
+        assertEquals(2, d.decomposeReste());
+    }
 
     /**
      * Méthode de test pour {@link mathematique.Decomposition#Decomposition()}.
