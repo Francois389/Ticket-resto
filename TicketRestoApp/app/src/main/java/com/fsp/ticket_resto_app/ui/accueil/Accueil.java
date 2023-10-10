@@ -4,10 +4,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.icu.util.Currency;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -68,12 +68,18 @@ public class Accueil extends Fragment {
         viewModel = new ViewModelProvider(this).get(MyViewModel.class);
 
         // Observer le LiveData
-        viewModel.getTextLiveData().observe(this, new Observer<Integer>() {
+        viewModel.getLabelTicket1().observe(this, new Observer<Integer>() {
             @Override
-            public void onChanged(String newText) {
+            public void onChanged(Integer integer) {
                 // Mettez à jour votre UI avec la nouvelle valeur de LiveData
-                TextView textView = requireView().findViewById(R.id.montantPremierTicket);
-                textView.setText(newText);
+                binding.labelPremierTicket.setText(getString(R.string.txt_label_quantite_ticket) + " " + integer + symboleMonnaie);
+            }
+        });
+        viewModel.getLabelTicket2().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                // Mettez à jour votre UI avec la nouvelle valeur de LiveData
+                binding.labelSecondTicket.setText(getString(R.string.txt_label_quantite_ticket) + " " + controlleur.getValeurTicket2() + symboleMonnaie);
             }
         });
     }
@@ -90,17 +96,13 @@ public class Accueil extends Fragment {
                 binding.quantitePremierTicket.setText(controlleur.getQuantiteTicket1()+"");
                 binding.quantiteSecondTicket.setText(controlleur.getQuantiteTicket2()+"");
                 binding.valeurReste.setText(controlleur.getReste()+ Currency.getInstance(Locale.getDefault()).getSymbol());
+                Log.d("Accueil", "calculer: " + controlleur.getValeurTicket1() + " " + controlleur.getValeurTicket2() + " " + montant);
             } catch (NumberFormatException e) {
                 popupErreur("Veillez saisir un entier");
             } catch (IllegalArgumentException e) {
                 popupErreur("Vous devez saisir une valeur positive");
             }
         }
-    }
-
-    // À un moment donné, vous pouvez mettre à jour la valeur du LiveData dans votre fragment
-    public void updateTextFromFragment(String newText) {
-        viewModel.updateText(newText);
     }
 
     private void popupErreur(String message) {

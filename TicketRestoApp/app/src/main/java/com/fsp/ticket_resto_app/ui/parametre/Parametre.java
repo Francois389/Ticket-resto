@@ -10,12 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.fsp.ticket_resto_app.R;
 import com.fsp.ticket_resto_app.controlleur.Controlleur;
 import com.fsp.ticket_resto_app.databinding.FragmentAccueilBinding;
 import com.fsp.ticket_resto_app.databinding.FragmentParametreBinding;
+import com.fsp.ticket_resto_app.viewModel.MyViewModel;
 
 import java.util.Locale;
 
@@ -29,6 +33,8 @@ public class Parametre extends Fragment {
     private FragmentAccueilBinding bindingAccueil;
     private Controlleur controlleur;
 
+    private MyViewModel viewModel;
+
     private static String symboleMonnaie = Currency.getInstance(Locale.getDefault()).getSymbol();
 
     @Override
@@ -36,8 +42,6 @@ public class Parametre extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentParametreBinding.inflate(inflater, container, false);
-        bindingAccueil = FragmentAccueilBinding.inflate(inflater, container, false);
-
         controlleur = Controlleur.getControlleur();
         return binding.getRoot();
     }
@@ -55,6 +59,13 @@ public class Parametre extends Fragment {
         });
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Créez une instance du ViewModel
+        viewModel = new ViewModelProvider(this).get(MyViewModel.class);
+    }
+
     private void enregistrer() {
         String saisieValeurTicket1;
         String saisieValeurTicket2;
@@ -64,16 +75,18 @@ public class Parametre extends Fragment {
 
         try {
             if (!saisieValeurTicket1.isEmpty()) {
-                Log.d("Francois", "label ticket 1 : " + bindingAccueil.labelPremierTicket.getText().toString());
                 int montantPremierTicket = Integer.parseInt(binding.montantPremierTicket.getText().toString());
                 controlleur.setValeurTicket1(montantPremierTicket);
-                bindingAccueil.labelPremierTicket.setText(getString(R.string.txt_montant_ticket_1) + " " + controlleur.getValeurTicket1() + symboleMonnaie);
+                //TODO mettre à jour le label de l'accueil
+                viewModel.updateLabel1(montantPremierTicket);
             }
 
             if (!saisieValeurTicket2.isEmpty()) {
                 int montantDeuxiemeTicket = Integer.parseInt(binding.montantDeuxiemeTicket.getText().toString());
                 controlleur.setValeurTicket2(montantDeuxiemeTicket);
-                bindingAccueil.labelSecondTicket.setText(getString(R.string.txt_montant_ticket_2) + " " + controlleur.getValeurTicket2() + symboleMonnaie);
+                //TODO mettre à jour le label de l'accueil
+                viewModel.updateLabel2(montantDeuxiemeTicket);
+
             }
             popupValidation("Les valeurs ont bien été enregistrées");
         } catch (NumberFormatException e) {
