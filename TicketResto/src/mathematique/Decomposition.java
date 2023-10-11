@@ -58,13 +58,13 @@ public class Decomposition {
         int valeurGrande = Math.max(premiereValeur, deuxiemeValeur);
 
         while (valeurPetite <= reste && reste != 0) {
-            if (valeurGrande <= reste) {
+            if (premiereValeur <= reste) {
                 resultat[0]++;
-                reste -= valeurGrande;
+                reste -= premiereValeur;
             }
-            if (valeurPetite <= reste) {
+            if (deuxiemeValeur <= reste) {
                 resultat[1]++;
-                reste -= valeurPetite;
+                reste -= deuxiemeValeur;
             }
         }
         resultat[2] = reste;
