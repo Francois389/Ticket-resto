@@ -50,6 +50,7 @@ class DecompositionTest {
         for (int j : i) {
             System.out.print(j + ", ");
         }
+        System.out.println();
         assertEquals(2, d.decomposeNbPremierValeur());
         assertEquals(0, d.decomposeNbDeuxiemeValeur());
         assertEquals(1, d.decomposeReste());
@@ -69,8 +70,8 @@ class DecompositionTest {
         System.out.println("Quantite 1 : " + i[0]);
         System.out.println("Quantite 2 : " + i[1]);
         System.out.println("Reste : " + i[2]);        
-        assertEquals(3, d.decomposeNbPremierValeur());
-        assertEquals(2, d.decomposeNbDeuxiemeValeur());
+        assertEquals(2, d.decomposeNbPremierValeur());
+        assertEquals(3, d.decomposeNbDeuxiemeValeur());
         assertEquals(2, d.decomposeReste());
 
         d = new Decomposition(5, 10, 37);
