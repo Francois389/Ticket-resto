@@ -58,30 +58,30 @@ public class Accueil extends Fragment {
                 calculer();
             }
         });
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
         // Créez une instance du ViewModel
         viewModel = new ViewModelProvider(this).get(MyViewModel.class);
 
         // Observer le LiveData
-        viewModel.getLabelTicket1().observe(this, new Observer<Integer>() {
+        viewModel.getLabelTicket1().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
                 // Mettez à jour votre UI avec la nouvelle valeur de LiveData
                 binding.labelPremierTicket.setText(getString(R.string.txt_label_quantite_ticket) + " " + integer + symboleMonnaie);
             }
         });
-        viewModel.getLabelTicket2().observe(this, new Observer<Integer>() {
+        viewModel.getLabelTicket2().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
                 // Mettez à jour votre UI avec la nouvelle valeur de LiveData
                 binding.labelSecondTicket.setText(getString(R.string.txt_label_quantite_ticket) + " " + controlleur.getValeurTicket2() + symboleMonnaie);
             }
         });
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     private void calculer() {
