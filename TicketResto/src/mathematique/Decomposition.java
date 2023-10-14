@@ -101,21 +101,20 @@ public class Decomposition {
      * le reste en indice 3.
      */
     public int[] decomposer() {
+        //TODO Issue #1 La place des valeurs ne sont pas gardé
         int[] resultat = new int[3];
         int reste = montant;
-        int valeurPetite
-        = premiereValeur < deuxiemeValeur ? premiereValeur : deuxiemeValeur;
-        int valeurGrande
-        = premiereValeur > deuxiemeValeur ? premiereValeur : deuxiemeValeur;
+        int valeurPetite = Math.min(premiereValeur, deuxiemeValeur);
+        int valeurGrande = Math.max(premiereValeur, deuxiemeValeur);
 
         while (valeurPetite <= reste && reste != 0) {
-            if (valeurGrande <= reste) {
+            if (premiereValeur <= reste) {
                 resultat[0]++;
-                reste -= valeurGrande;
+                reste -= premiereValeur;
             }
-            if (valeurPetite <= reste) {
+            if (deuxiemeValeur <= reste) {
                 resultat[1]++;
-                reste -= valeurPetite;
+                reste -= deuxiemeValeur;
             }
         }
         resultat[2] = reste;
@@ -199,4 +198,15 @@ public class Decomposition {
         this.premiereValeur = premiereValeur;
     }
 
+
+    /* non javadoc - @see java.lang.Object#toString() */
+    @Override
+    public String toString() {
+        return   "Decomposition [premiereValeur=" + premiereValeur 
+               + ", deuxiemeValeur=" + deuxiemeValeur + ", montant="
+               + montant + "]";
+    }
+    
+    
+    
 }

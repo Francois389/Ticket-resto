@@ -3,7 +3,7 @@
  * IUT de Rodez, info1 2022-2023, aucun copyright ni copyleft
  */
 
-package com.fsp.ticket_resto_app.modele.mathematique;
+package com.fsp.ticket_resto_app.donnee.mathematique;
 
 /** TODO comment class responsibility (SRP)
  * Étant donnée deux entier positif et un montant réel positif,
@@ -11,6 +11,9 @@ package com.fsp.ticket_resto_app.modele.mathematique;
  * @author François
  */
 public class Decomposition {
+
+    private static final int VALEUR_TICKET_1 = 8;
+    private static final int VALEUR_TICKET_2 = 13;
 
     /** Le premier entier pour la  decomposition */
     private int premiereValeur;
@@ -20,9 +23,9 @@ public class Decomposition {
     private int montant;
     
     /** TODO comment initial state properties
-     * @param premiereValeur
-     * @param deuxiemeValeur
-     * @param montant
+     * @param premiereValeur La valeur du premier entier
+     * @param deuxiemeValeur La valeur du deuxième entier
+     * @param montant Le montant à décomposer
      */
     public Decomposition(int premiereValeur, int deuxiemeValeur, int montant) {
         super();
@@ -39,8 +42,10 @@ public class Decomposition {
      */
     public Decomposition() {
         super();
+        premiereValeur = VALEUR_TICKET_1;
+        deuxiemeValeur = VALEUR_TICKET_2;
     }
-    
+
     /**
      * Décompose montant en somme
      * de premiereValeur et
@@ -51,21 +56,20 @@ public class Decomposition {
      * le reste en indice 3.
      */
     public int[] decomposer() {
+        //TODO Issue #1 La place des valeurs ne sont pas gardé
         int[] resultat = new int[3];
         int reste = montant;
-        int valeurPetite
-        = premiereValeur < deuxiemeValeur ? premiereValeur : deuxiemeValeur;
-        int valeurGrande
-        = premiereValeur > deuxiemeValeur ? premiereValeur : deuxiemeValeur;
+        int valeurPetite = Math.min(premiereValeur, deuxiemeValeur);
+        int valeurGrande = Math.max(premiereValeur, deuxiemeValeur);
 
         while (valeurPetite <= reste && reste != 0) {
-            if (valeurGrande <= reste) {
+            if (premiereValeur <= reste) {
                 resultat[0]++;
-                reste -= valeurGrande;
+                reste -= premiereValeur;
             }
-            if (valeurPetite <= reste) {
+            if (deuxiemeValeur <= reste) {
                 resultat[1]++;
-                reste -= valeurPetite;
+                reste -= deuxiemeValeur;
             }
         }
         resultat[2] = reste;
