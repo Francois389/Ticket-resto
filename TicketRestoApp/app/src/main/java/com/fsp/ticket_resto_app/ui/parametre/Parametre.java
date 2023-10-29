@@ -2,21 +2,17 @@ package com.fsp.ticket_resto_app.ui.parametre;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.icu.util.Currency;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.fsp.ticket_resto_app.controlleur.Controlleur;
-import com.fsp.ticket_resto_app.databinding.FragmentAccueilBinding;
 import com.fsp.ticket_resto_app.databinding.FragmentParametreBinding;
-
-import java.util.Locale;
 
 /**
  * Le controlleur de l'onget Paramétre.
@@ -25,13 +21,11 @@ import java.util.Locale;
 public class Parametre extends Fragment {
 
     private FragmentParametreBinding binding;
-    private FragmentAccueilBinding bindingAccueil;
     private Controlleur controlleur;
 
-    private static String symboleMonnaie = Currency.getInstance(Locale.getDefault()).getSymbol();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentParametreBinding.inflate(inflater, container, false);
@@ -40,23 +34,16 @@ public class Parametre extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.montantPremierTicket.setText(controlleur.getValeurTicket1() + "");
         binding.montantDeuxiemeTicket.setText(controlleur.getValeurTicket2() + "");
-        binding.btnEnregistrer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                enregistrer();
-            }
-        });
+        binding.btnEnregistrer.setOnClickListener(v -> enregistrer());
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Créez une instance du ViewModel
-        viewModel = new ViewModelProvider(this).get(MyViewModel.class);
     }
 
     private void enregistrer() {
@@ -78,8 +65,6 @@ public class Parametre extends Fragment {
 
             }
             popupValidation("Les valeurs ont bien été enregistrées");
-        } catch (NumberFormatException e) {
-            popupErreur("Veillez saisir un nombre entier positif");
         } catch (IllegalArgumentException e) {
             popupErreur("Veillez saisir un nombre entier positif");
         }
@@ -93,9 +78,7 @@ public class Parametre extends Fragment {
         builder.setTitle("Attention");
         builder.setCancelable(true);
 
-        builder.setNegativeButton("Ok", (DialogInterface.OnClickListener) (dialog, which) -> {
-            dialog.cancel();
-        });
+        builder.setNegativeButton("Ok", (DialogInterface.OnClickListener) (dialog, which) -> dialog.cancel());
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
