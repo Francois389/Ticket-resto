@@ -34,7 +34,7 @@
                         <HBox alignment="CENTER" prefHeight="66.0" prefWidth="335.0" spacing="30.0">
                            <children>
                               <TextField fx:id="montantAPayer" promptText="Montant à payer" />
-                              <Button mnemonicParsing="false" onAction="#calculer" styleClass="boutonValider" text="Calculer" />
+                              <Button mnemonicParsing="false" onAction="#calculer" style="-fx-background-color: blue;" styleClass="boutonValider" text="Calculer" textFill="WHITE" />
                            </children>
                         </HBox>
                      </children>

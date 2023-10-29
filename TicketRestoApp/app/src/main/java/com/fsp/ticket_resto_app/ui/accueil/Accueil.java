@@ -11,13 +11,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.fsp.ticket_resto_app.R;
 import com.fsp.ticket_resto_app.controlleur.Controlleur;
 import com.fsp.ticket_resto_app.databinding.FragmentAccueilBinding;
-import com.fsp.ticket_resto_app.viewModel.MyViewModel;
 
 import java.util.Locale;
 
@@ -29,7 +27,6 @@ public class Accueil extends Fragment {
 
     private FragmentAccueilBinding binding;
     private Controlleur controlleur;
-    private MyViewModel viewModel;
 
     private static String symboleMonnaie = Currency.getInstance(Locale.getDefault()).getSymbol();
 
@@ -46,37 +43,19 @@ public class Accueil extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        
-        binding.labelPremierTicket.setText(getString(R.string.txt_label_quantite_ticket) + " " + controlleur.getValeurTicket1() + symboleMonnaie);
-        binding.labelSecondTicket.setText(getString(R.string.txt_label_quantite_ticket) + " " + controlleur.getValeurTicket2() + symboleMonnaie);
-        binding.quantitePremierTicket.setText("0");
-        binding.quantiteSecondTicket.setText("0");
-        binding.valeurReste.setText(0 + symboleMonnaie);
+        updateVue();
         binding.btnCalculer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 calculer();
             }
         });
+    }
 
-        // Créez une instance du ViewModel
-        viewModel = new ViewModelProvider(this).get(MyViewModel.class);
-
-        // Observer le LiveData
-        viewModel.getLabelTicket1().observe(getViewLifecycleOwner(), new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                // Mettez à jour votre UI avec la nouvelle valeur de LiveData
-                binding.labelPremierTicket.setText(getString(R.string.txt_label_quantite_ticket) + " " + integer + symboleMonnaie);
-            }
-        });
-        viewModel.getLabelTicket2().observe(getViewLifecycleOwner(), new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                // Mettez à jour votre UI avec la nouvelle valeur de LiveData
-                binding.labelSecondTicket.setText(getString(R.string.txt_label_quantite_ticket) + " " + controlleur.getValeurTicket2() + symboleMonnaie);
-            }
-        });
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateVue();
     }
 
     @Override
@@ -103,6 +82,14 @@ public class Accueil extends Fragment {
                 popupErreur("Vous devez saisir une valeur positive");
             }
         }
+    }
+
+    private void updateVue() {
+        binding.labelPremierTicket.setText(getString(R.string.txt_label_quantite_ticket) + " " + controlleur.getValeurTicket1() + symboleMonnaie);
+        binding.labelSecondTicket.setText(getString(R.string.txt_label_quantite_ticket) + " " + controlleur.getValeurTicket2() + symboleMonnaie);
+        binding.quantitePremierTicket.setText("0");
+        binding.quantiteSecondTicket.setText("0");
+        binding.valeurReste.setText(0 + symboleMonnaie);
     }
 
     private void popupErreur(String message) {

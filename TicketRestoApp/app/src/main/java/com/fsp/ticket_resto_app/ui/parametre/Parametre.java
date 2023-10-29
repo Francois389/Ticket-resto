@@ -4,22 +4,17 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.icu.util.Currency;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.fsp.ticket_resto_app.R;
 import com.fsp.ticket_resto_app.controlleur.Controlleur;
 import com.fsp.ticket_resto_app.databinding.FragmentAccueilBinding;
 import com.fsp.ticket_resto_app.databinding.FragmentParametreBinding;
-import com.fsp.ticket_resto_app.viewModel.MyViewModel;
 
 import java.util.Locale;
 
@@ -32,8 +27,6 @@ public class Parametre extends Fragment {
     private FragmentParametreBinding binding;
     private FragmentAccueilBinding bindingAccueil;
     private Controlleur controlleur;
-
-    private MyViewModel viewModel;
 
     private static String symboleMonnaie = Currency.getInstance(Locale.getDefault()).getSymbol();
 
@@ -77,15 +70,11 @@ public class Parametre extends Fragment {
             if (!saisieValeurTicket1.isEmpty()) {
                 int montantPremierTicket = Integer.parseInt(binding.montantPremierTicket.getText().toString());
                 controlleur.setValeurTicket1(montantPremierTicket);
-                //TODO mettre à jour le label de l'accueil
-                viewModel.updateLabel1(montantPremierTicket);
             }
 
             if (!saisieValeurTicket2.isEmpty()) {
                 int montantDeuxiemeTicket = Integer.parseInt(binding.montantDeuxiemeTicket.getText().toString());
                 controlleur.setValeurTicket2(montantDeuxiemeTicket);
-                //TODO mettre à jour le label de l'accueil
-                viewModel.updateLabel2(montantDeuxiemeTicket);
 
             }
             popupValidation("Les valeurs ont bien été enregistrées");
