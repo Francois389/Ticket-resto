@@ -52,44 +52,6 @@ public class Decomposition {
         this.montant = montant;
     }
     
-    /**
-     * Décompose montant en somme
-     * de premiereValeur et
-     * de deuxiemeValeur avec un reste.
-     * @return Un tableau contenant
-     * le nombre de premiereValeur en indice 0
-     * le nombre de deuxiemeValeur en indice 1 et
-     * le reste en indice 3.
-     */
-    public int[] decomposer() {
-        int[] resultat = new int[3];
-        int reste = montant;
-        int valeurPetite
-        = premiereValeur < deuxiemeValeur ? premiereValeur : deuxiemeValeur;
-        int valeurGrande
-        = premiereValeur > deuxiemeValeur ? premiereValeur : deuxiemeValeur;
-
-        while (valeurPetite <= reste && reste != 0) {
-            if (valeurGrande <= reste) {
-                resultat[0]++;
-                reste -= valeurGrande;
-            }
-            if (valeurPetite <= reste) {
-                resultat[1]++;
-                reste -= valeurPetite;
-            }
-        }
-        resultat[2] = reste;
-        return resultat;
-    }
-    
-    /**
-     * Decompose le montant mais ne renvoie que le nombre de deuxiemeValeur.
-     * @return le nombre de deuxiemeValeur nessecaire pour décomposer le montant
-     */
-    public int decomposeNbDeuxiemeValeur () {
-        return decomposer()[1];
-    }
     
     /**
      * Décompose montant en somme
@@ -127,21 +89,6 @@ public class Decomposition {
      */
     public int decomposeNbDeuxiemeValeur () {
         return decomposer()[1];
-    }
-
-    /**
-     * Decompose le montant mais ne renvoie que le nombre de premierValeur.
-     * @return le nombre de premierValeur nessecaire pour décomposer le montant.
-     */
-    public int decomposeNbPremierValeur () {
-        return decomposer()[0];
-    }
-
-    /**
-     * @return la valeur du reste de la decomposition.
-     */
-    public int decomposeReste () {
-        return decomposer()[2];
     }
 
     /**
