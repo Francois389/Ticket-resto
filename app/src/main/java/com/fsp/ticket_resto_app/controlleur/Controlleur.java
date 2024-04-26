@@ -32,7 +32,7 @@ public class Controlleur {
         return instance;
     }
 
-    public void setMontantAPayer(int montant) {
+    public void setMontantAPayer(double montant) {
         decomposition.setMontant(montant);
     }
 

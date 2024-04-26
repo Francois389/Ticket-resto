@@ -69,7 +69,7 @@ public class Accueil extends Fragment {
             popupErreur("Veillez saisir un montant");
         } else {
             try {
-                int montant = Integer.parseInt(textSaisie);
+                double montant = Double.parseDouble(textSaisie);
                 controlleur.setMontantAPayer(montant);
                 binding.quantitePremierTicket.setText(controlleur.getQuantiteTicket1()+"");
                 binding.quantiteSecondTicket.setText(controlleur.getQuantiteTicket2()+"");
