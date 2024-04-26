@@ -44,7 +44,7 @@ public class Controlleur {
         return decomposition.decomposeNbDeuxiemeValeur();
     }
 
-    public int getReste() {
+    public double getReste() {
         return decomposition.decomposeReste();
     }
 
@@ -56,11 +56,11 @@ public class Controlleur {
         decomposition.setDeuxiemeValeur(valeur);
     }
 
-    public int getValeurTicket1() {
+    public double getValeurTicket1() {
         return decomposition.getPremiereValeur();
     }
 
-    public int getValeurTicket2() {
+    public double getValeurTicket2() {
         return decomposition.getDeuxiemeValeur();
     }
 }
