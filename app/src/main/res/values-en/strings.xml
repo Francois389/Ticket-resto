@@ -5,9 +5,12 @@
     <string name="txt_invite_saisie_montant">Enter the amount to paid</string>
     <string name="placeholder_montant">Amount payable</string>
     <string name="button_text">Calculate</string>
-    <string name="txt_reste">Amount still to be paid</string>
+    <string name="txt_reste">There\'s still</string>
     <string name="txt_enregistrer">Save</string>
     <string name="txt_montant_ticket_1">Value of the first ticket:</string>
     <string name="txt_montant_ticket_2">Value of the second ticket:</string>
-    <string name="txt_label_quantite_ticket">Number of ticket with the value of</string>
+    <string name="to_pay">to paid</string>
+    <string name="nb_ticket">%s times</string>
+    <string name="txt_result">Result</string>
+    <string name="txt_ticket_of">Ticket of</string>
 </resources>

@@ -6,9 +6,13 @@
     <string name="txt_invite_saisie_montant">Saisissez le montant à payer</string>
     <string name="placeholder_montant">Montant à payer</string>
     <string name="button_text">Calculer</string>
-    <string name="txt_reste">Reste à payer</string>
+    <string name="txt_reste">"Il reste "</string>
+    <string name="to_pay">à payer</string>
     <string name="txt_enregistrer">Enregistrer</string>
     <string name="txt_montant_ticket_1">Montant du premier ticket :</string>
     <string name="txt_montant_ticket_2">Montant du deuxième ticket :</string>
-    <string name="txt_label_quantite_ticket">Nombre de tickets de </string>
+    <string name="txt_label_quantite_ticket" translatable="false">%s</string>
+    <string name="nb_ticket">%s fois</string>
+    <string name="txt_result">Résultat</string>
+    <string name="txt_ticket_of">Ticket de</string>
 </resources>

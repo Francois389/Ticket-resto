@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -27,7 +28,7 @@ public class Accueil extends Fragment {
     private FragmentAccueilBinding binding;
     private Controlleur controlleur;
 
-    private static String symboleMonnaie = Currency.getInstance(Locale.getDefault()).getSymbol();
+    private static final String symboleMonnaie = Currency.getInstance(Locale.getDefault()).getSymbol();
 
 
     @Override
@@ -42,7 +43,7 @@ public class Accueil extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        updateVue();
+        resetVue();
         binding.btnCalculer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,7 +55,7 @@ public class Accueil extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        updateVue();
+        resetVue();
     }
 
     @Override
@@ -83,14 +84,21 @@ public class Accueil extends Fragment {
         }
     }
 
-    private void updateVue() {
-        binding.labelPremierTicket.setText(getString(R.string.txt_label_quantite_ticket) + " " + controlleur.getValeurTicket1() + symboleMonnaie);
-        binding.labelSecondTicket.setText(getString(R.string.txt_label_quantite_ticket) + " " + controlleur.getValeurTicket2() + symboleMonnaie);
+    /**
+     * Remet à zéro les champs de l'interface graphique.
+     */
+    private void resetVue() {
+        binding.labelPremierTicket.setText(String.format(getString(R.string.txt_label_quantite_ticket), (controlleur.getValeurTicket1() + "")) + " " + symboleMonnaie);
+        binding.labelSecondTicket.setText(String.format(getString(R.string.txt_label_quantite_ticket), (controlleur.getValeurTicket2() + "")) + " " + symboleMonnaie);
         binding.quantitePremierTicket.setText("0");
         binding.quantiteSecondTicket.setText("0");
         binding.valeurReste.setText(0 + symboleMonnaie);
     }
 
+    /**
+     * Affiche une popup d'erreur.
+     * @param message le message à afficher.
+     */
     private void popupErreur(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
@@ -104,6 +112,10 @@ public class Accueil extends Fragment {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    private void toastErreur(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 
 }
