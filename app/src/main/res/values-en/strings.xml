@@ -13,4 +13,5 @@
     <string name="nb_ticket">times</string>
     <string name="txt_result">Result</string>
     <string name="txt_ticket_of">Ticket of</string>
+    <string name="txt_parametre">Configure tickets</string>
 </resources>

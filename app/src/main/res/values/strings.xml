@@ -15,4 +15,5 @@
     <string name="nb_ticket">fois</string>
     <string name="txt_result">Résultat</string>
     <string name="txt_ticket_of">Ticket de</string>
+    <string name="txt_parametre">Configurer les tickets</string>
 </resources>

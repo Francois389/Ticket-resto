@@ -35,8 +35,6 @@
             android:layout_weight="2"
             android:text="@string/title"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
-
-
     </LinearLayout>
 
 
@@ -67,7 +65,6 @@
 
 
     <View
-        android:id="@+id/divider1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider" />
@@ -127,7 +124,6 @@
             </LinearLayout>
 
             <View
-                android:id="@+id/divider2"
                 android:layout_width="2dp"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="50dp"
@@ -167,7 +163,6 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/divider3"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider" />
@@ -188,11 +183,11 @@
             android:id="@+id/valeurReste"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="3dp"
             android:background="@drawable/rounded_corner"
             android:backgroundTint="@color/quantiteBackground"
             android:paddingHorizontal="10dp"
             android:paddingVertical="3dp"
-            android:layout_marginHorizontal="3dp"
             android:text="8€" />
 
         <TextView
@@ -201,5 +196,17 @@
             android:text="@string/to_pay" />
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <Button
+        android:id="@+id/btnParametre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_parametre"
+        tools:ignore="TouchTargetSizeCheck" />
 
 </LinearLayout>

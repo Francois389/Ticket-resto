@@ -1,21 +1,32 @@
 package com.fsp.ticket_resto_app.ui.accueil;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.LauncherActivity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.icu.util.Currency;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.fsp.ticket_resto_app.R;
 import com.fsp.ticket_resto_app.controlleur.Controlleur;
 import com.fsp.ticket_resto_app.ui.parametre.Parametre;
+import com.fsp.ticket_resto_app.utilitaire.Popup;
 
 import static com.fsp.ticket_resto_app.utilitaire.UtilitaireKt.simpleFormat;
 
@@ -26,56 +37,64 @@ import java.util.Locale;
  *
  * @author François de Saint Palais
  */
-public class Accueil extends Fragment {
+public class Accueil extends AppCompatActivity {
 
-    private FragmentAccueilBinding binding;
     private Controlleur controlleur;
 
+    private Button btnCalculer;
+    private Button btnParametre;
+    private EditText montantAPayer;
+    private TextView labelPremierTicket;
+    private TextView labelSecondTicket;
+    private TextView quantitePremierTicket;
+    private TextView quantiteSecondTicket;
+    private TextView valeurReste;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = FragmentAccueilBinding.inflate(inflater, container, false);
-        controlleur = Controlleur.getControlleur();
-        return binding.getRoot();
+    private ActivityResultLauncher<Intent> goParametreLauncher;
+
+    private void initialiseComposants() {
+        btnCalculer = findViewById(R.id.btnCalculer);
+        btnParametre = findViewById(R.id.btnParametre);
+        montantAPayer = findViewById(R.id.montantAPayer);
+        labelPremierTicket = findViewById(R.id.labelPremierTicket);
+        labelSecondTicket = findViewById(R.id.labelSecondTicket);
+        quantitePremierTicket = findViewById(R.id.quantitePremierTicket);
+        quantiteSecondTicket = findViewById(R.id.quantiteSecondTicket);
+        valeurReste = findViewById(R.id.valeurReste);
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        resetVue();
-        binding.btnCalculer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calculer();
-            }
-        });
-    }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        resetVue();
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setContentView(R.layout.fragment_accueil);
+
+        initialiseComposants();
+        controlleur = Controlleur.getControlleur();
+        goParametreLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), this::retourActivity);
+
+        btnCalculer.setOnClickListener(v -> calculer());
+        btnParametre.setOnClickListener(v -> goParametre());
+
+        resetVue();
+    }
+
+    private void retourActivity(ActivityResult result) {
+        resetVue();
     }
 
     private void calculer() {
         String textSaisie;
-        textSaisie = binding.montantAPayer.getText().toString();
+        textSaisie = montantAPayer.getText().toString();
         if (textSaisie.isEmpty()) {
             popupErreur("Veillez saisir un montant");
         } else {
             try {
                 double montant = Double.parseDouble(textSaisie);
                 controlleur.setMontantAPayer(montant);
-                binding.quantitePremierTicket.setText(controlleur.getQuantiteTicket1() + "");
-                binding.quantiteSecondTicket.setText(controlleur.getQuantiteTicket2() + "");
-                binding.valeurReste.setText(simpleFormat(controlleur.getReste()) + getMoneySymbol());
+                quantitePremierTicket.setText(controlleur.getQuantiteTicket1() + "");
+                quantiteSecondTicket.setText(controlleur.getQuantiteTicket2() + "");
+                valeurReste.setText(simpleFormat(controlleur.getReste()) + getMoneySymbol());
                 Log.d("Accueil", "calculer: " + controlleur.getValeurTicket1() + " " + controlleur.getValeurTicket2() + " " + montant);
             } catch (NumberFormatException e) {
                 popupErreur("Veillez saisir un entier");
@@ -93,11 +112,16 @@ public class Accueil extends Fragment {
      * Remet à zéro les champs de l'interface graphique.
      */
     private void resetVue() {
-        binding.labelPremierTicket.setText(String.format(getString(R.string.txt_label_quantite_ticket), simpleFormat(controlleur.getValeurTicket1())) + " " + getMoneySymbol());
-        binding.labelSecondTicket.setText(String.format(getString(R.string.txt_label_quantite_ticket), simpleFormat(controlleur.getValeurTicket2())) + " " + getMoneySymbol());
-        binding.quantitePremierTicket.setText("0");
-        binding.quantiteSecondTicket.setText("0");
-        binding.valeurReste.setText(0 + getMoneySymbol());
+        labelPremierTicket.setText(String.format(getString(R.string.txt_label_quantite_ticket), simpleFormat(controlleur.getValeurTicket1())) + " " + getMoneySymbol());
+        labelSecondTicket.setText(String.format(getString(R.string.txt_label_quantite_ticket), simpleFormat(controlleur.getValeurTicket2())) + " " + getMoneySymbol());
+        quantitePremierTicket.setText("0");
+        quantiteSecondTicket.setText("0");
+        valeurReste.setText(0 + getMoneySymbol());
+    }
+
+    private void goParametre() {
+        Intent intent = new Intent(this, Parametre.class);
+        goParametreLauncher.launch(intent);
     }
 
     /**
@@ -106,22 +130,11 @@ public class Accueil extends Fragment {
      * @param message le message à afficher.
      */
     private void popupErreur(String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-
-        builder.setMessage(message);
-        builder.setTitle("Attention");
-        builder.setCancelable(true);
-
-        builder.setNegativeButton("Ok", (DialogInterface.OnClickListener) (dialog, which) -> {
-            dialog.cancel();
-        });
-
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        Popup.Companion.showErreur(message, this);
     }
 
     private void toastErreur(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
 }

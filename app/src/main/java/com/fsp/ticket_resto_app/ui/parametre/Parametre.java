@@ -4,11 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.fsp.ticket_resto_app.R;
 import com.fsp.ticket_resto_app.controlleur.Controlleur;
 import com.fsp.ticket_resto_app.utilitaire.Popup;
 
@@ -19,64 +22,65 @@ import static com.fsp.ticket_resto_app.utilitaire.UtilitaireKt.simpleFormat;
  *
  * @author François de Saint Palais
  */
-public class Parametre extends Fragment {
+public class Parametre extends AppCompatActivity {
 
-    private FragmentParametreBinding binding;
     private Controlleur controlleur;
 
+    private Button btnEnregistrer;
+    private EditText montantPremierTicket;
+    private EditText montantDeuxiemeTicket;
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = FragmentParametreBinding.inflate(inflater, container, false);
-        controlleur = Controlleur.getControlleur();
-        return binding.getRoot();
-    }
+    private void initialiseComposants() {
+        btnEnregistrer = findViewById(R.id.btnEnregistrer);
+        montantPremierTicket = findViewById(R.id.montantPremierTicket);
+        montantDeuxiemeTicket = findViewById(R.id.montantDeuxiemeTicket);
 
-    @Override
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        binding.montantPremierTicket.setText(simpleFormat(controlleur.getValeurTicket1()));
-        binding.montantDeuxiemeTicket.setText(simpleFormat(controlleur.getValeurTicket2()));
-        binding.btnEnregistrer.setOnClickListener(v -> enregistrer());
+        montantPremierTicket.setText(simpleFormat(controlleur.getValeurTicket1()));
+        montantDeuxiemeTicket.setText(simpleFormat(controlleur.getValeurTicket2()));
+
+        btnEnregistrer.setOnClickListener(v -> enregistrer());
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setContentView(R.layout.fragment_parametre);
+        controlleur = Controlleur.getControlleur();
+
+        initialiseComposants();
     }
 
     private void enregistrer() {
         String saisieValeurTicket1;
         String saisieValeurTicket2;
 
-        saisieValeurTicket1 = binding.montantPremierTicket.getText().toString();
-        saisieValeurTicket2 = binding.montantDeuxiemeTicket.getText().toString();
+        saisieValeurTicket1 = montantPremierTicket.getText().toString();
+        saisieValeurTicket2 = montantDeuxiemeTicket.getText().toString();
 
         try {
             if (!saisieValeurTicket1.isEmpty()) {
-                double montantPremierTicket = Double.parseDouble(binding.montantPremierTicket.getText().toString());
+                double montantPremierTicket = Double.parseDouble(saisieValeurTicket1);
                 controlleur.setValeurTicket1(montantPremierTicket);
             }
 
             if (!saisieValeurTicket2.isEmpty()) {
-                double montantDeuxiemeTicket = Double.parseDouble(binding.montantDeuxiemeTicket.getText().toString());
+                double montantDeuxiemeTicket = Double.parseDouble(saisieValeurTicket2);
                 controlleur.setValeurTicket2(montantDeuxiemeTicket);
 
             }
             popupValidation("Les valeurs ont bien été enregistrées");
+            setResult(RESULT_OK);
+            finish();
         } catch (IllegalArgumentException e) {
             popupErreur("Veillez saisir un nombre entier positif");
         }
-
     }
 
     private void popupErreur(String message) {
-        Popup.Companion.showErreur(message, getContext());
+        Popup.Companion.showErreur(message, this);
     }
 
     private void popupValidation(String message) {
-        Popup.Companion.showInformation(message, getContext());
+        Popup.Companion.showInformation(message, this);
     }
 }
