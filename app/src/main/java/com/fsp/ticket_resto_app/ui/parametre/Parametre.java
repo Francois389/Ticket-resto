@@ -1,7 +1,5 @@
 package com.fsp.ticket_resto_app.ui.parametre;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.fsp.ticket_resto_app.controlleur.Controlleur;
 import com.fsp.ticket_resto_app.databinding.FragmentParametreBinding;
-import com.fsp.ticket_resto_app.ui.Popup;
+import com.fsp.ticket_resto_app.utilitaire.Popup;
 
 /**
  * Le controlleur de l'onget Paramétre.

@@ -1,4 +1,4 @@
-package com.fsp.ticket_resto_app.ui
+package com.fsp.ticket_resto_app.utilitaire
 
 import android.app.AlertDialog
 import android.content.Context
