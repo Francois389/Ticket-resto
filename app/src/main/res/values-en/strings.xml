@@ -10,7 +10,7 @@
     <string name="txt_montant_ticket_1">Value of the first ticket:</string>
     <string name="txt_montant_ticket_2">Value of the second ticket:</string>
     <string name="to_pay">to paid</string>
-    <string name="nb_ticket">%s times</string>
+    <string name="nb_ticket">times</string>
     <string name="txt_result">Result</string>
     <string name="txt_ticket_of">Ticket of</string>
 </resources>
