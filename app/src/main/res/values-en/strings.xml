@@ -7,8 +7,8 @@
     <string name="button_text">Calculate</string>
     <string name="txt_reste">There\'s still</string>
     <string name="txt_enregistrer">Save</string>
-    <string name="txt_montant_ticket_1">Value of the first ticket:</string>
-    <string name="txt_montant_ticket_2">Value of the second ticket:</string>
+    <string name="txt_montant_ticket_1">1st first ticket:</string>
+    <string name="txt_montant_ticket_2">2nd ticket:</string>
     <string name="to_pay">to paid</string>
     <string name="nb_ticket">times</string>
     <string name="txt_result">Result</string>

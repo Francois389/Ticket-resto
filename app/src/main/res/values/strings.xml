@@ -9,8 +9,8 @@
     <string name="txt_reste">"Il reste "</string>
     <string name="to_pay">à payer</string>
     <string name="txt_enregistrer">Enregistrer</string>
-    <string name="txt_montant_ticket_1">Montant du premier ticket :</string>
-    <string name="txt_montant_ticket_2">Montant du deuxième ticket :</string>
+    <string name="txt_montant_ticket_1">1° ticket :</string>
+    <string name="txt_montant_ticket_2">2° ticket :</string>
     <string name="txt_label_quantite_ticket" translatable="false">%s</string>
     <string name="nb_ticket">fois</string>
     <string name="txt_result">Résultat</string>
