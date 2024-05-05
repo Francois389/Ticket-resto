@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.fsp.ticket_resto_app.R;
 import com.fsp.ticket_resto_app.controlleur.Controlleur;
-import com.fsp.ticket_resto_app.databinding.FragmentAccueilBinding;
+import com.fsp.ticket_resto_app.ui.parametre.Parametre;
 
 import static com.fsp.ticket_resto_app.utilitaire.UtilitaireKt.simpleFormat;
 

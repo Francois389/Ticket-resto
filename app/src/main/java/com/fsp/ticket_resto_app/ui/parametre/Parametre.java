@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.fsp.ticket_resto_app.controlleur.Controlleur;
-import com.fsp.ticket_resto_app.databinding.FragmentParametreBinding;
 import com.fsp.ticket_resto_app.utilitaire.Popup;
 
 import static com.fsp.ticket_resto_app.utilitaire.UtilitaireKt.simpleFormat;
