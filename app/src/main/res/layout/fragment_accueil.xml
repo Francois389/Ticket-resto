@@ -189,6 +189,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_corner"
+            android:backgroundTint="@color/quantiteBackground"
             android:paddingHorizontal="10dp"
             android:paddingVertical="3dp"
             android:layout_marginHorizontal="3dp"

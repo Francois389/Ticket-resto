@@ -3,5 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="valueBackGround">#c0c0c0</color>
-    <color name="quantiteBackgroun">#AAD1FF</color>
+    <color name="quantiteBackground">#AAD1FF</color>
 </resources>
