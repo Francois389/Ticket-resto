@@ -21,6 +21,7 @@ import java.util.Locale;
 
 /**
  * Le controlleur de l'onget Accueil.
+ *
  * @author François de Saint Palais
  */
 public class Accueil extends Fragment {
@@ -33,7 +34,7 @@ public class Accueil extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-    Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentAccueilBinding.inflate(inflater, container, false);
         controlleur = Controlleur.getControlleur();
@@ -72,9 +73,9 @@ public class Accueil extends Fragment {
             try {
                 double montant = Double.parseDouble(textSaisie);
                 controlleur.setMontantAPayer(montant);
-                binding.quantitePremierTicket.setText(controlleur.getQuantiteTicket1()+"");
-                binding.quantiteSecondTicket.setText(controlleur.getQuantiteTicket2()+"");
-                binding.valeurReste.setText(controlleur.getReste()+ Currency.getInstance(Locale.getDefault()).getSymbol());
+                binding.quantitePremierTicket.setText(controlleur.getQuantiteTicket1() + "");
+                binding.quantiteSecondTicket.setText(controlleur.getQuantiteTicket2() + "");
+                binding.valeurReste.setText(controlleur.getReste() + Currency.getInstance(Locale.getDefault()).getSymbol());
                 Log.d("Accueil", "calculer: " + controlleur.getValeurTicket1() + " " + controlleur.getValeurTicket2() + " " + montant);
             } catch (NumberFormatException e) {
                 popupErreur("Veillez saisir un entier");
@@ -88,15 +89,32 @@ public class Accueil extends Fragment {
      * Remet à zéro les champs de l'interface graphique.
      */
     private void resetVue() {
-        binding.labelPremierTicket.setText(String.format(getString(R.string.txt_label_quantite_ticket), (controlleur.getValeurTicket1() + "")) + " " + symboleMonnaie);
-        binding.labelSecondTicket.setText(String.format(getString(R.string.txt_label_quantite_ticket), (controlleur.getValeurTicket2() + "")) + " " + symboleMonnaie);
+        binding.labelPremierTicket.setText(String.format(getString(R.string.txt_label_quantite_ticket), simpleFormat(controlleur.getValeurTicket1())) + " " + symboleMonnaie);
+        binding.labelSecondTicket.setText(String.format(getString(R.string.txt_label_quantite_ticket), simpleFormat(controlleur.getValeurTicket2())) + " " + symboleMonnaie);
         binding.quantitePremierTicket.setText("0");
         binding.quantiteSecondTicket.setText("0");
         binding.valeurReste.setText(0 + symboleMonnaie);
     }
 
     /**
+     * Formate un double pour l'affichage.
+     * Si la valeur est un entier, elle est affichée sans décimale.
+     * Sinon, elle est affichée avec deux décimales.
+     *
+     * @param value la valeur à formater.
+     * @return la valeur formatée.
+     */
+    private String simpleFormat(double value) {
+        String reponse = String.format("%.2f", value);
+        if (value == value.longValue()) {
+            return String.format("%d", (long) value);
+        }
+        return reponse;
+    }
+
+    /**
      * Affiche une popup d'erreur.
+     *
      * @param message le message à afficher.
      */
     private void popupErreur(String message) {
