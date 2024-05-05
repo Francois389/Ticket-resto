@@ -29,8 +29,6 @@ public class Accueil extends Fragment {
     private FragmentAccueilBinding binding;
     private Controlleur controlleur;
 
-    private static final String symboleMonnaie = Currency.getInstance(Locale.getDefault()).getSymbol();
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,12 +83,16 @@ public class Accueil extends Fragment {
         }
     }
 
+    private static String getMoneySymbol() {
+        return Currency.getInstance(Locale.getDefault()).getSymbol();
+    }
+
     /**
      * Remet à zéro les champs de l'interface graphique.
      */
     private void resetVue() {
-        binding.labelPremierTicket.setText(String.format(getString(R.string.txt_label_quantite_ticket), simpleFormat(controlleur.getValeurTicket1())) + " " + symboleMonnaie);
-        binding.labelSecondTicket.setText(String.format(getString(R.string.txt_label_quantite_ticket), simpleFormat(controlleur.getValeurTicket2())) + " " + symboleMonnaie);
+        binding.labelPremierTicket.setText(String.format(getString(R.string.txt_label_quantite_ticket), simpleFormat(controlleur.getValeurTicket1())) + " " + getMoneySymbol());
+        binding.labelSecondTicket.setText(String.format(getString(R.string.txt_label_quantite_ticket), simpleFormat(controlleur.getValeurTicket2())) + " " + getMoneySymbol());
         binding.quantitePremierTicket.setText("0");
         binding.quantiteSecondTicket.setText("0");
         binding.valeurReste.setText(0 + symboleMonnaie);
