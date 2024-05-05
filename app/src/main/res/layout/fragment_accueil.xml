@@ -112,7 +112,8 @@
                     <TextView
                         android:id="@+id/quantitePremierTicket"
                         style="@style/quantiteValue"
-                        android:text="0" />
+                        android:text="0"
+                         />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -188,6 +189,7 @@
             android:backgroundTint="@color/quantiteBackground"
             android:paddingHorizontal="10dp"
             android:paddingVertical="3dp"
+            android:textColor="@color/black"
             android:text="8€" />
 
         <TextView
