@@ -48,11 +48,11 @@ public class Controlleur {
         return decomposition.decomposeReste();
     }
 
-    public void setValeurTicket1(int valeur) {
+    public void setValeurTicket1(double valeur) {
         decomposition.setPremiereValeur(valeur);
     }
 
-    public void setValeurTicket2(int valeur) {
+    public void setValeurTicket2(double valeur) {
         decomposition.setDeuxiemeValeur(valeur);
     }
 

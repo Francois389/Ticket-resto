@@ -13,6 +13,8 @@ import com.fsp.ticket_resto_app.controlleur.Controlleur;
 import com.fsp.ticket_resto_app.databinding.FragmentParametreBinding;
 import com.fsp.ticket_resto_app.utilitaire.Popup;
 
+import static com.fsp.ticket_resto_app.utilitaire.UtilitaireKt.simpleFormat;
+
 /**
  * Le controlleur de l'onget Paramétre.
  *
@@ -36,8 +38,8 @@ public class Parametre extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.montantPremierTicket.setText(controlleur.getValeurTicket1() + "");
-        binding.montantDeuxiemeTicket.setText(controlleur.getValeurTicket2() + "");
+        binding.montantPremierTicket.setText(simpleFormat(controlleur.getValeurTicket1()));
+        binding.montantDeuxiemeTicket.setText(simpleFormat(controlleur.getValeurTicket2()));
         binding.btnEnregistrer.setOnClickListener(v -> enregistrer());
     }
 
@@ -55,12 +57,12 @@ public class Parametre extends Fragment {
 
         try {
             if (!saisieValeurTicket1.isEmpty()) {
-                int montantPremierTicket = Integer.parseInt(binding.montantPremierTicket.getText().toString());
+                double montantPremierTicket = Double.parseDouble(binding.montantPremierTicket.getText().toString());
                 controlleur.setValeurTicket1(montantPremierTicket);
             }
 
             if (!saisieValeurTicket2.isEmpty()) {
-                int montantDeuxiemeTicket = Integer.parseInt(binding.montantDeuxiemeTicket.getText().toString());
+                double montantDeuxiemeTicket = Double.parseDouble(binding.montantDeuxiemeTicket.getText().toString());
                 controlleur.setValeurTicket2(montantDeuxiemeTicket);
 
             }
