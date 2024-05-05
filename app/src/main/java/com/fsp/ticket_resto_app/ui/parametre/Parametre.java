@@ -57,22 +57,25 @@ public class Parametre extends AppCompatActivity {
         saisieValeurTicket1 = montantPremierTicket.getText().toString();
         saisieValeurTicket2 = montantDeuxiemeTicket.getText().toString();
 
-        try {
-            if (!saisieValeurTicket1.isEmpty()) {
-                double montantPremierTicket = Double.parseDouble(saisieValeurTicket1);
-                controlleur.setValeurTicket1(montantPremierTicket);
-            }
+        if (saisieValeurTicket1.isEmpty() || saisieValeurTicket2.isEmpty()) {
+            popupErreur("Veillez remplir les deux champs");
+        } else {
+            try {
+                if (!saisieValeurTicket1.isEmpty()) {
+                    double montantPremierTicket = Double.parseDouble(saisieValeurTicket1);
+                    controlleur.setValeurTicket1(montantPremierTicket);
+                }
 
-            if (!saisieValeurTicket2.isEmpty()) {
-                double montantDeuxiemeTicket = Double.parseDouble(saisieValeurTicket2);
-                controlleur.setValeurTicket2(montantDeuxiemeTicket);
-
+                if (!saisieValeurTicket2.isEmpty()) {
+                    double montantDeuxiemeTicket = Double.parseDouble(saisieValeurTicket2);
+                    controlleur.setValeurTicket2(montantDeuxiemeTicket);
+                }
+                popupValidation("Les valeurs ont bien été enregistrées");
+                setResult(RESULT_OK);
+                finish();
+            } catch (IllegalArgumentException e) {
+                popupErreur("Veillez saisir un nombre entier positif");
             }
-            popupValidation("Les valeurs ont bien été enregistrées");
-            setResult(RESULT_OK);
-            finish();
-        } catch (IllegalArgumentException e) {
-            popupErreur("Veillez saisir un nombre entier positif");
         }
     }
 
