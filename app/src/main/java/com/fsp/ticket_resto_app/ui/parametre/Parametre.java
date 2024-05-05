@@ -13,9 +13,11 @@ import androidx.fragment.app.Fragment;
 
 import com.fsp.ticket_resto_app.controlleur.Controlleur;
 import com.fsp.ticket_resto_app.databinding.FragmentParametreBinding;
+import com.fsp.ticket_resto_app.ui.Popup;
 
 /**
  * Le controlleur de l'onget Paramétre.
+ *
  * @author François de Saint Palais
  */
 public class Parametre extends Fragment {
@@ -72,29 +74,10 @@ public class Parametre extends Fragment {
     }
 
     private void popupErreur(String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-
-        builder.setMessage(message);
-        builder.setTitle("Attention");
-        builder.setCancelable(true);
-
-        builder.setNegativeButton("Ok", (DialogInterface.OnClickListener) (dialog, which) -> dialog.cancel());
-
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        Popup.Companion.showErreur(message, getContext());
     }
+
     private void popupValidation(String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-
-        builder.setMessage(message);
-        builder.setTitle("Information");
-        builder.setCancelable(true);
-
-        builder.setNegativeButton("Ok", (DialogInterface.OnClickListener) (dialog, which) -> {
-            dialog.cancel();
-        });
-
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        Popup.Companion.showInformation(message, getContext());
     }
 }
