@@ -73,7 +73,7 @@ public class Accueil extends Fragment {
                 controlleur.setMontantAPayer(montant);
                 binding.quantitePremierTicket.setText(controlleur.getQuantiteTicket1() + "");
                 binding.quantiteSecondTicket.setText(controlleur.getQuantiteTicket2() + "");
-                binding.valeurReste.setText(controlleur.getReste() + Currency.getInstance(Locale.getDefault()).getSymbol());
+                binding.valeurReste.setText(simpleFormat(controlleur.getReste()) + getMoneySymbol());
                 Log.d("Accueil", "calculer: " + controlleur.getValeurTicket1() + " " + controlleur.getValeurTicket2() + " " + montant);
             } catch (NumberFormatException e) {
                 popupErreur("Veillez saisir un entier");
@@ -95,7 +95,7 @@ public class Accueil extends Fragment {
         binding.labelSecondTicket.setText(String.format(getString(R.string.txt_label_quantite_ticket), simpleFormat(controlleur.getValeurTicket2())) + " " + getMoneySymbol());
         binding.quantitePremierTicket.setText("0");
         binding.quantiteSecondTicket.setText("0");
-        binding.valeurReste.setText(0 + symboleMonnaie);
+        binding.valeurReste.setText(0 + getMoneySymbol());
     }
 
     /**
@@ -108,7 +108,7 @@ public class Accueil extends Fragment {
      */
     private String simpleFormat(double value) {
         String reponse = String.format("%.2f", value);
-        if (value == value.longValue()) {
+        if (value == (long) value) {
             return String.format("%d", (long) value);
         }
         return reponse;
