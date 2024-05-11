@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.icu.util.Currency;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,12 +33,16 @@ import static com.fsp.ticket_resto_app.utilitaire.UtilitaireKt.simpleFormat;
 
 import java.util.Locale;
 
+import kotlin.Pair;
+
 /**
  * Le controlleur de l'onget Accueil.
  *
  * @author François de Saint Palais
  */
 public class Accueil extends AppCompatActivity {
+
+    private static final String TAG = "Accueil";
 
     private Controlleur controlleur;
 
@@ -78,14 +81,8 @@ public class Accueil extends AppCompatActivity {
         btnCalculer.setOnClickListener(v -> calculer());
         btnParametre.setOnClickListener(v -> goParametre());
 
-        resetVue();
         loadPersistance();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        savePersistance();
+        resetVue();
     }
 
     private void retourActivity(ActivityResult result) {
@@ -148,16 +145,9 @@ public class Accueil extends AppCompatActivity {
 
     private void loadPersistance() {
         if (controlleur != null) {
-            Pair<Double, Double> valeurs = PersistanceKt.chargerValeurs(this);
-            controlleur.setValeurTicket1(valeurs.first);
-            controlleur.setValeurTicket2(valeurs.second);
+            kotlin.Pair<Double, Double> valeurs = PersistanceKt.chargerValeurs(this);
+            controlleur.setValeurTicket1(valeurs.component1());
+            controlleur.setValeurTicket2(valeurs.component2());
         }
     }
-
-    private void savePersistance() {
-        if (controlleur != null) {
-            PersistanceKt.sauvegarderValeurs(controlleur.getValeurTicket1(), controlleur.getValeurTicket2(), this);
-        }
-    }
-
 }

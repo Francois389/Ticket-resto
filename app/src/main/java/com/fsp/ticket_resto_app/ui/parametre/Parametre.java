@@ -1,6 +1,7 @@
 package com.fsp.ticket_resto_app.ui.parametre;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.fsp.ticket_resto_app.PersistanceKt;
 import com.fsp.ticket_resto_app.R;
 import com.fsp.ticket_resto_app.controlleur.Controlleur;
 import com.fsp.ticket_resto_app.utilitaire.Popup;
@@ -29,6 +31,8 @@ public class Parametre extends AppCompatActivity {
     private Button btnEnregistrer;
     private EditText montantPremierTicket;
     private EditText montantDeuxiemeTicket;
+
+    private static final String TAG = "Parametre";
 
     private void initialiseComposants() {
         btnEnregistrer = findViewById(R.id.btnEnregistrer);
@@ -72,6 +76,7 @@ public class Parametre extends AppCompatActivity {
                 }
                 popupValidation("Les valeurs ont bien été enregistrées");
                 setResult(RESULT_OK);
+                savePersistance();
                 finish();
             } catch (IllegalArgumentException e) {
                 popupErreur("Veillez saisir un nombre entier positif");
@@ -85,5 +90,12 @@ public class Parametre extends AppCompatActivity {
 
     private void popupValidation(String message) {
         Popup.Companion.showInformation(message, this);
+    }
+
+    private void savePersistance() {
+        Log.d(TAG, "savePersistance: ");
+        if (controlleur != null) {
+            PersistanceKt.sauvegarderValeurs(controlleur.getValeurTicket1(), controlleur.getValeurTicket2(), this);
+        }
     }
 }
