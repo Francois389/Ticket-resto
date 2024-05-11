@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.icu.util.Currency;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.fsp.ticket_resto_app.PersistanceKt;
 import com.fsp.ticket_resto_app.R;
 import com.fsp.ticket_resto_app.controlleur.Controlleur;
 import com.fsp.ticket_resto_app.ui.parametre.Parametre;
@@ -77,6 +79,13 @@ public class Accueil extends AppCompatActivity {
         btnParametre.setOnClickListener(v -> goParametre());
 
         resetVue();
+        loadPersistance();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        savePersistance();
     }
 
     private void retourActivity(ActivityResult result) {
@@ -135,6 +144,20 @@ public class Accueil extends AppCompatActivity {
 
     private void toastErreur(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    private void loadPersistance() {
+        if (controlleur != null) {
+            Pair<Double, Double> valeurs = PersistanceKt.chargerValeurs(this);
+            controlleur.setValeurTicket1(valeurs.first);
+            controlleur.setValeurTicket2(valeurs.second);
+        }
+    }
+
+    private void savePersistance() {
+        if (controlleur != null) {
+            PersistanceKt.sauvegarderValeurs(controlleur.getValeurTicket1(), controlleur.getValeurTicket2(), this);
+        }
     }
 
 }
