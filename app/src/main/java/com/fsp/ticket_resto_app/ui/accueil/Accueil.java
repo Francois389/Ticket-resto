@@ -23,6 +23,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.fsp.ticket_resto_app.PersistanceKt;
 import com.fsp.ticket_resto_app.R;
 import com.fsp.ticket_resto_app.controlleur.Controlleur;
 import com.fsp.ticket_resto_app.ui.parametre.Parametre;
@@ -32,12 +33,16 @@ import static com.fsp.ticket_resto_app.utilitaire.UtilitaireKt.simpleFormat;
 
 import java.util.Locale;
 
+import kotlin.Pair;
+
 /**
  * Le controlleur de l'onget Accueil.
  *
  * @author François de Saint Palais
  */
 public class Accueil extends AppCompatActivity {
+
+    private static final String TAG = "Accueil";
 
     private Controlleur controlleur;
 
@@ -76,6 +81,7 @@ public class Accueil extends AppCompatActivity {
         btnCalculer.setOnClickListener(v -> calculer());
         btnParametre.setOnClickListener(v -> goParametre());
 
+        loadPersistance();
         resetVue();
     }
 
@@ -137,4 +143,11 @@ public class Accueil extends AppCompatActivity {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
+    private void loadPersistance() {
+        if (controlleur != null) {
+            kotlin.Pair<Double, Double> valeurs = PersistanceKt.chargerValeurs(this);
+            controlleur.setValeurTicket1(valeurs.component1());
+            controlleur.setValeurTicket2(valeurs.component2());
+        }
+    }
 }
