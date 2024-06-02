@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_rowSpan="1"
@@ -14,67 +15,90 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="10dp"
             android:layout_weight="1"
+            android:orientation="vertical"
             android:paddingHorizontal="10dp"
+            android:paddingTop="10dp"
             android:paddingBottom="10dp">
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/txt_montant_ticket_1" />
+                android:layout_weight="1"
+                android:text="@string/txt_montant_ticket_1"
+                tools:ignore="NestedWeights" />
 
             <EditText
                 android:id="@+id/montantPremierTicket"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:ems="10"
                 android:layout_gravity="center_horizontal"
+                android:layout_weight="0"
+                android:autofillHints="5"
+                android:ems="10"
                 android:inputType="numberDecimal" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="10dp"
             android:layout_weight="1"
+            android:orientation="vertical"
             android:paddingHorizontal="10dp"
+            android:paddingTop="10dp"
             android:paddingBottom="10dp">
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
                 android:text="@string/txt_montant_ticket_2" />
 
             <EditText
                 android:id="@+id/montantDeuxiemeTicket"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_weight="0"
                 android:ems="10"
-                android:layout_gravity="center_horizontal"
                 android:inputType="numberDecimal" />
         </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnEnregistrer"
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/txt_enregistrer" />
+        android:divider="@drawable/divider10gap"
+        android:showDividers="middle"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnAnnuler"
+            style="@style/BtnNegatif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/txt_annuler" />
+
+        <Button
+            android:id="@+id/btnEnregistrer"
+            style="@style/BtnPostif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/txt_enregistrer" />
+    </LinearLayout>
+
 
 </LinearLayout>

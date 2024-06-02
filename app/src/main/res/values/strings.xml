@@ -16,4 +16,5 @@
     <string name="txt_result">Résultat</string>
     <string name="txt_ticket_of">Ticket de</string>
     <string name="txt_parametre">Configurer les tickets</string>
+    <string name="txt_annuler">Annuler</string>
 </resources>
