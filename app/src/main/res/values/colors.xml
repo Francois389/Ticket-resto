@@ -6,4 +6,5 @@
     <color name="quantiteBackground">#AAD1FF</color>
     <color name="positif">#1BAF1B</color>
     <color name="negatif">#B20000</color>
+    <color name="action">#4561FF</color>
 </resources>

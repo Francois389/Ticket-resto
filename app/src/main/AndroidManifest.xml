@@ -20,9 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.parametre.Parametre"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
