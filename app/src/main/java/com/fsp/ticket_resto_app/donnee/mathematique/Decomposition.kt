@@ -5,7 +5,7 @@ import kotlin.math.min
 class Decomposition(
     var premiereValeur: Double = 8.0,
     var deuxiemeValeur: Double = 13.0,
-    var montant: Double = 0.0
+    var montant: Double = 0.0,
 ) {
 
     private var reste: Double = 0.0
@@ -44,5 +44,4 @@ class Decomposition(
         decomposition()
         return reste
     }
-
 }

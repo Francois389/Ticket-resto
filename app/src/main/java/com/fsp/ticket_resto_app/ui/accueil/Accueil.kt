@@ -6,11 +6,9 @@ import android.content.Intent
 import android.icu.util.Currency
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -45,7 +43,6 @@ class Accueil : AppCompatActivity() {
     private val moneySymbol: String = Currency.getInstance(Locale.getDefault()).symbol
 
     private var goParametreLauncher: ActivityResultLauncher<Intent>? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -107,7 +104,6 @@ class Accueil : AppCompatActivity() {
                 showErreur("Le montant saisi n'est pas valide", this)
             }
         }
-
     }
 
     /**

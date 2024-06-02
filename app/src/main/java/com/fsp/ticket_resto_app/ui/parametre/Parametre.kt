@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.fsp.ticket_resto_app.R
 import com.fsp.ticket_resto_app.controlleur.Controlleur
 import com.fsp.ticket_resto_app.sauvegarderValeurs
-import com.fsp.ticket_resto_app.utilitaire.showInformation
 import com.fsp.ticket_resto_app.utilitaire.showErreur
+import com.fsp.ticket_resto_app.utilitaire.showInformation
 import com.fsp.ticket_resto_app.utilitaire.simpleFormat
 
 /**
@@ -25,7 +25,6 @@ class Parametre : AppCompatActivity() {
     private var montantDeuxiemeTicket: EditText? = null
 
     private fun initialiseComposants() {
-
         btnEnregistrer = findViewById(R.id.btnEnregistrer)
         btnAnnuler = findViewById(R.id.btnAnnuler)
         montantPremierTicket = findViewById(R.id.montantPremierTicket)
@@ -41,7 +40,6 @@ class Parametre : AppCompatActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.setContentView(R.layout.fragment_parametre)
-
 
         initialiseComposants()
     }
